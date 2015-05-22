@@ -23,22 +23,22 @@ public abstract class Dictionary {
 	}
 	
 	public void clear() {
-		set.clear();
+		this.set.clear();
 	}
 	
 	public void fromStringList(List<String> list) {
-		Iterator<String> lista = list.iterator();
-		for(int i = 0; i < list.size(); i ++) {
-			Word word = new Word(lista.next());
+		Iterator<String> itr = list.iterator();
+		while(itr.hasNext()) {
+			Word word = new Word(itr.next());
 			set.add(word);
 		}
 	}
 	
 	public List<String> toListString(){
-		Iterator<Word> word = set.iterator();
+		Iterator<Word> itr = set.iterator();
 		List<String> lista = new ArrayList<String>();
-		for(int i = 1; i <= set.size(); i ++){
-			lista.add(word.next().getWord());
+		while(itr.hasNext()){
+			lista.add(itr.next().getWord());
 		}
 		return lista;
 	}
