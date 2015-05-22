@@ -22,21 +22,28 @@ public class Document {
 		output.close();
 	}
 	
-	public Word getWord() {
+	public Word getWord() throws IOException {
 		char c;
 		String string = "";
-		while ((c = (char) input.read()) != -1) {
+		while (!((c = (char) input.read()) != -1)) {
 			if(!Character.isAlphabetic(c)) {
 				if(string.equals("")){
 					output.write(c);
-					input.mark(0);
 				} else {
-					Word word = new Word(string);
-					return word;
+					input.reset();
+					break;
 				}
 			} else {
 				string += c;
+				input.mark(0);
 			}
 		}
+		Word word = new Word(string);
+		return word;
+	}
+	
+	
+	public void putWord(Word word) throws IOException {
+		output.write(word.getWord());
 	}
 }
