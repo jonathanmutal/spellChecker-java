@@ -2,8 +2,10 @@ package dictionary;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,20 +22,23 @@ public class FileDictionary extends Dictionary{
 		loadPath = s;
 	}
 	
-	public void load(String path) {
-		try(BufferedReader br = new BufferedReader(new FileReader(path))){
-			List<String> lista = new ArrayList<String>();
-			String line = br.readLine();
+	public void load(String path) throws FileNotFoundException {
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		List<String> lista = new ArrayList<String>();
+		String line;
+		try {
+			line = br.readLine();
 			while(line != null){
 				lista.add(line);
 				line = br.readLine();
 			}
-			fromStringList(lista); 
-		} catch (Exception e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+		fromStringList(lista); 
 	}
+			
 	
 	public void save() {
 		save(loadPath);
@@ -43,11 +48,14 @@ public class FileDictionary extends Dictionary{
 		List<String> lista = new ArrayList<String>();
 		lista = toListString();
 		Iterator<String> itr = lista.iterator();
-		try (BufferedWriter file = new BufferedWriter(new FileWriter(path))){
+		BufferedWriter file;
+		try {
+			file = new BufferedWriter(new FileWriter(path));
 			while(itr.hasNext()) {
 				file.write(itr.next()+"\n");
 			}	 
-		} catch (Exception e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

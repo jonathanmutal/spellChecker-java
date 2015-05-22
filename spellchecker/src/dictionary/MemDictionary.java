@@ -1,6 +1,6 @@
 package dictionary;
 
-public class MemDictionary {
+public class MemDictionary extends Dictionary {
 
 	public MemDictionary(){
 		super();

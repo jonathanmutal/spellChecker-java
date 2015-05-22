@@ -1,17 +1,21 @@
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import word.Word;
 
 import dictionary.Dictionary;
+import dictionary.FileDictionary;
+import dictionary.MemDictionary;
 import document.Document;
 
 
 public class Spellchecker {
 
 	public Spellchecker() {
+		
 	}
 	
 	public static Word consultUser(Word word, Dictionary dict, Dictionary dict_ignored) throws IOException {
@@ -53,7 +57,24 @@ public class Spellchecker {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		if (args.length < 2) {
+			System.out.println("nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
+			return;
+		}
 
+		String path = (args.length >= 3) ? args[2] : "dict.txt";
+		String text = args[1];
+		FileDictionary dictMain = new FileDictionary(path); 
+		try {
+			dictMain.load(path);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No existe archivo");
+			return;
+		}
+		   MemDictionary dictIgnored = new MemDictionary(); 
+		   proccesDocument(text, "out.txt", dictMain, dictIgnored);
+		   dictMain.save();
 	}
 
 }
