@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,18 +43,26 @@ public class Spellchecker {
 	
 	public static void proccesDocument(String docIn, String docOut, Dictionary dictIn, Dictionary dictIgnored) {
 		try {
-			Document document = new Document(docIn, docOut);
-			Word word = new Word(); 
-			while((word = document.getWord()) != null){			
-				if(dictIn.contains(word) || dictIgnored.contains(word)) {
-					document.putWord(word);
-				} else {
-					word = consultUser(word, dictIn, dictIgnored);
-					document.putWord(word);
+			Document document = new Document(docIn, docOut);		
+			Word word = new Word();
+			boolean hayPalabra = true;
+			while(hayPalabra){
+				try {
+					word = document.getWord();
+					if(dictIn.contains(word) || dictIgnored.contains(word)) {
+						document.putWord(word);
+					} else {
+						word = consultUser(word, dictIn, dictIgnored);
+						document.putWord(word);
+					}
+				} catch (EOFException e) {
+					hayPalabra = false;
 				}
 			}
 			document.close();
 			System.out.println("El documento "+ docIn + " ha sido procesado. Resultados en out.txt");
+		} catch (FileNotFoundException e) {
+			System.out.println("No se encontro el archivo "+ docIn);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,24 +72,24 @@ public class Spellchecker {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		if (args.length < 2) {
+		if (args.length < 1) {
 			System.out.println("nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
 			return;
 		}
 
 		String path = (args.length >= 2) ? args[1] : "dict.txt";
 		String text = args[0];
-		FileDictionary dictMain = new FileDictionary(path); 
+		FileDictionary dictMain;
 		try {
-			dictMain.load(path);
+			dictMain = new FileDictionary(path);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("No existe archivo");
+			System.out.println("No existe el diccionario");
 			return;
-		}
-		   MemDictionary dictIgnored = new MemDictionary(); 
-		   proccesDocument(text, "out.txt", dictMain, dictIgnored);
-		   dictMain.save();
+		} 
+		
+	   MemDictionary dictIgnored = new MemDictionary(); 
+	   proccesDocument(text, "out.txt", dictMain, dictIgnored);
+	   dictMain.save();
 	}
 
 }

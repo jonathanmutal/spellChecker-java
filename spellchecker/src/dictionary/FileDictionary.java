@@ -13,13 +13,15 @@ import java.util.List;
 public class FileDictionary extends Dictionary{
 	private String loadPath;
 
-	public FileDictionary(){
+	public FileDictionary() throws FileNotFoundException{
 		loadPath = "dict.txt";
+		load(loadPath);
 	}
 	
-	public FileDictionary(String s){
+	public FileDictionary(String s) throws FileNotFoundException {
 		super();
 		loadPath = s;
+		load(s);
 	}
 	
 	public void load(String path) throws FileNotFoundException {

@@ -2,9 +2,10 @@ package word;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class WordSet {
-	private HashSet<Word> set;
+	private Set<Word> set;
 
 	public WordSet() {
 		this.set = new HashSet<Word>(); 

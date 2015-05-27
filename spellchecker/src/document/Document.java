@@ -2,6 +2,7 @@ package document;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,9 +13,10 @@ public class Document {
 	private BufferedReader input;
 	private BufferedWriter output;
 
-	public Document(String in, String out) throws IOException {
+	public Document(String in, String out) throws IOException  {
 		input = new BufferedReader(new FileReader(in));
 		output = new BufferedWriter(new FileWriter(out));
+		
 	}
 	
 	public void close() throws IOException {
@@ -22,33 +24,48 @@ public class Document {
 		output.close();
 	}
 	
-	public Word getWord() throws IOException {
+	public Word getWord() throws EOFException {
 		char c;
 		String string = "";
-		int n;
-		while ((n = input.read()) != -1) {
-			c = (char) n;
-			if(!Character.isAlphabetic(c)) {
-				if(string.equals("")){
-					output.write(c);
+		int n = 0;
+		try {
+			n = input.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (n  != -1) {
+			try {
+				c = (char) n;
+				if(!Character.isAlphabetic(c)) {
+					if(string.equals("")){
+						output.write(c);
+					} else {
+						input.reset();
+						break;
+					}
 				} else {
-					input.reset();
-					break;
+					string += c;
+					input.mark(0);
 				}
-			} else {
-				string += c;
-				input.mark(0);
+				n = input.read();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		if(string.equals("")){
-			return null;
+		if(n == -1) {
+			throw new EOFException();
 		}
 		Word word = new Word(string);
 		return word;
 	}
 	
 	
-	public void putWord(Word word) throws IOException {
-		output.write(word.getWord());
+	public void putWord(Word word) {
+		try {
+			output.write(word.getWord());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
