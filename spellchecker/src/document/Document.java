@@ -25,7 +25,9 @@ public class Document {
 	public Word getWord() throws IOException {
 		char c;
 		String string = "";
-		while (!((c = (char) input.read()) != -1)) {
+		int n;
+		while ((n = input.read()) != -1) {
+			c = (char) n;
 			if(!Character.isAlphabetic(c)) {
 				if(string.equals("")){
 					output.write(c);
@@ -37,6 +39,9 @@ public class Document {
 				string += c;
 				input.mark(0);
 			}
+		}
+		if(string.equals("")){
+			return null;
 		}
 		Word word = new Word(string);
 		return word;

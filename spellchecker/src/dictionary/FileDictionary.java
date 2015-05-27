@@ -32,6 +32,7 @@ public class FileDictionary extends Dictionary{
 				lista.add(line);
 				line = br.readLine();
 			}
+			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,6 +55,7 @@ public class FileDictionary extends Dictionary{
 			while(itr.hasNext()) {
 				file.write(itr.next()+"\n");
 			}	 
+			file.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

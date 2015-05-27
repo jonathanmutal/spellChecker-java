@@ -21,16 +21,19 @@ public class Spellchecker {
 	public static Word consultUser(Word word, Dictionary dict, Dictionary dict_ignored) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String s;
-		System.out.println("Palabra no  reconocida" + word.getWord() + ":");
+		do{
+		System.out.println("Palabra no  reconocida " + word.getWord() + " :");
 		System.out.println("Aceptar (a) - Ignorar (i) - Reemplazar (r)");
 		s = in.readLine();
-		if(s == "a") {
+		}while(!s.equals("a") && !s.equals("i") && !s.equals("r"));
+		
+		if(s.equals("a")) {
 			dict.add(word);
 		}
-		if(s == "i") {
+		if(s.equals("i")) {
 			dict_ignored.add(word);
 		}
-		if(s == "r") {
+		if(s.equals("r")) {
 			System.out.println("Ingrese una palabra:");
 			word.setWord(in.readLine());
 		}
@@ -49,6 +52,8 @@ public class Spellchecker {
 					document.putWord(word);
 				}
 			}
+			document.close();
+			System.out.println("El documento "+ docIn + " ha sido procesado. Resultados en out.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,13 +62,14 @@ public class Spellchecker {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		if (args.length < 2) {
 			System.out.println("nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
 			return;
 		}
 
-		String path = (args.length >= 3) ? args[2] : "dict.txt";
-		String text = args[1];
+		String path = (args.length >= 2) ? args[1] : "dict.txt";
+		String text = args[0];
 		FileDictionary dictMain = new FileDictionary(path); 
 		try {
 			dictMain.load(path);
