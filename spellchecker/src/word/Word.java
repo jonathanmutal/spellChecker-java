@@ -23,7 +23,7 @@ public class Word {
 
 	/**
 	 * Segundo constructor de la clase.
-	 * @param s string que definira el word.
+	 * @param s string que definira el word
 	 */
 	
 	public Word(String s){
@@ -32,7 +32,7 @@ public class Word {
 
 	/**
 	 * Setea un Word con un String.
-	 * @param s Un string para setear el word.
+	 * @param s Un string para setear el word
 	 * @return void
 	 */
 
@@ -42,7 +42,7 @@ public class Word {
 
 	/**
 	 * Obtiene un String del Word.
-	 * @return El string de la palabra(Word).
+	 * @return El string de la palabra(Word)
 	 */
 
 	public String getWord() {
@@ -50,8 +50,8 @@ public class Word {
 	}
 
 	/**
-	 * Método sobre-escrito, asocia un objeto Word con un código hash.
-	 * @return El código hash asociado a la palabra.
+	 * Asocia un objeto Word con un código hash.
+	 * @return El código hash asociado a la palabra
 	 */
 
 	@Override
@@ -60,9 +60,9 @@ public class Word {
 	}
 
 	/**
-	 * Método sobre-escrito, indica cuando algún objeto es igual a este.
-	 * @param obj La referencia de un objeto que se quiere comparar.
-	 * @return true si el objeto es el mismo que el argumento, false si no.
+	 * Indica cuando algún objeto es igual a este.
+	 * @param obj La referencia de un objeto que se quiere comparar
+	 * @return true si el objeto es el mismo que el argumento, false si no
 	 */
 
 	@Override
