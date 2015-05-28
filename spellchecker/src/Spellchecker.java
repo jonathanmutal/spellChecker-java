@@ -37,7 +37,7 @@ public class Spellchecker {
 	 * @param dict diccionario principal donde se almacena palabras aceptadas
 	 * @param dict_ignored diccionario ignorado donde se almacena palabras ignoradas
 	 * @return palabra con la accion realizada
-	 * @throws IOException
+	 * @throws IOException se ha producido alguna excepcion I/O de algun tipo
 	 */
 	
 	public static Word consultUser(Word word, Dictionary dict, Dictionary dict_ignored) throws IOException {
