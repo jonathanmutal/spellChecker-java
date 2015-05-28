@@ -13,19 +13,19 @@ import word.Word;
  */
 
 public class Document {
-	
+
 	/**
 	 * Representa el archivo del entrada  que contiene el documento a procesar.
 	 */
-	
+
 	private BufferedReader input;
-	
+
 	/**
 	 * Representa el archivo destino donde se guardara el documento modificado.
 	 */
-	
+
 	private BufferedWriter output;
-	
+
 	/**
 	 * Construye un nuevo documento a procesar.
 	 * @param in archivo de entrada
@@ -33,7 +33,7 @@ public class Document {
 	 * @throws errores del metodo close y en el caso de no encuentre el archivo
 	 * in
 	 */
-
+	
 	public Document(String in, String out) throws IOException  {
 		
 		input = new BufferedReader(new FileReader(in));
@@ -44,7 +44,7 @@ public class Document {
 	/**
 	 * Cierra el documento.
 	 */
-	
+
 	public void close()  {
 		try {
 			input.close();
@@ -53,7 +53,7 @@ public class Document {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Lee el documento de entrada, palabra por palabra, copiando al documento
 	 * de salida todos los caracteres no alfabeticos precedentes que encuentre.
@@ -92,7 +92,7 @@ public class Document {
 	
 	/**
 	 * Escribe una palabra en el archivo de salida.
-	 * @param palabra a escribir
+	 * @param word palabra a escribir
 	 */
 	
 	public void putWord(Word word) {

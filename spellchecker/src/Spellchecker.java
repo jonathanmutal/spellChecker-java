@@ -20,7 +20,7 @@ import document.Document;
  */
 
 public class Spellchecker {
-	
+
 	/**
 	 * Constructor de spellchecker. Convenciones de nomeclatura.
 	 */
@@ -32,7 +32,7 @@ public class Spellchecker {
 	/**
 	 * Propone tres acciones para las palabras desconocidas: aceptar, ignorar,
 	 * remplazar. En el caso de aceptar la palabra, la incorpora a dict
-	 * y devuelve la misma palabra.En caso de ignorar, la incorpora a 
+	 * y devuelve la misma palabra. En caso de ignorar, la incorpora a 
 	 * dict_ignored y devuelve la misma palabra. En el caso de reemplazar
 	 * la palabra se pedira una palabra al usuario y delvolvera dicha palabra.
 	 * @param word palabra por la que se consultara al usuario
@@ -133,5 +133,4 @@ public class Spellchecker {
 	   proccesDocument(text, "out.txt", dictMain, dictIgnored);
 	   dictMain.save();
 	}
-
 }
