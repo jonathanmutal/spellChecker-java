@@ -30,9 +30,12 @@ public class Document {
 	 * Construye un nuevo documento a procesar.
 	 * @param in archivo de entrada
 	 * @param out archivo de salida
+	 * @throws errores del metodo close y en el caso de no encuentre el archivo
+	 * in
 	 */
 
 	public Document(String in, String out) throws IOException  {
+		
 		input = new BufferedReader(new FileReader(in));
 		output = new BufferedWriter(new FileWriter(out));
 		
@@ -40,12 +43,15 @@ public class Document {
 
 	/**
 	 * Cierra el documento.
-	 *@throws Excepciones lanzadas por el metodo close
 	 */
 	
-	public void close() throws IOException {
-		input.close();
-		output.close();
+	public void close()  {
+		try {
+			input.close();
+			output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -86,7 +92,7 @@ public class Document {
 	
 	/**
 	 * Escribe una palabra en el archivo de salida.
-	 * @param word palabra a escribir
+	 * @param palabra a escribir
 	 */
 	
 	public void putWord(Word word) {

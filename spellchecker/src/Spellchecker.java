@@ -11,15 +11,16 @@ import dictionary.MemDictionary;
 import document.Document;
 
 /**
- * La clase Spellchecker es el punto de entrada a la aplicacion.
+ * La clase Spellchecker, es un corrector ortografico
+ *  es el punto de entrada a la aplicacion.
  * 
- * @author Jonathan David Mutal y Guillermo Luis incatasciato
+ * @author Jonathan David Mutal y Guillermo Luis Incatasciato
  * @version 1.0
  * 
  */
 
 public class Spellchecker {
-
+	
 	/**
 	 * Constructor de spellchecker. Convenciones de nomeclatura.
 	 */
@@ -29,51 +30,51 @@ public class Spellchecker {
 	}
 	
 	/**
-	 * Consulta al usuario sobre que accion realizar (aceptar, ignorar o
-	 * reemplazar) con la palabra w. Una vez que el usuario elige, 
-	 * realiza la accion elegida.
-	 * 
-	 * @param word palabra a realizar accion
-	 * @param dict diccionario principal donde se almacena palabras aceptadas
-	 * @param dict_ignored diccionario ignorado donde se almacena palabras ignoradas
-	 * @return palabra con la accion realizada
-	 * @throws IOException se ha producido alguna excepcion I/O de algun tipo
+	 * Propone tres acciones para las palabras desconocidas: aceptar, ignorar,
+	 * remplazar. En el caso de aceptar la palabra, la incorpora a dict
+	 * y devuelve la misma palabra.En caso de ignorar, la incorpora a 
+	 * dict_ignored y devuelve la misma palabra. En el caso de reemplazar
+	 * la palabra se pedira una palabra al usuario y delvolvera dicha palabra.
+	 * @param word palabra por la que se consultara al usuario
+	 * @param dict diccionario al que se agregara la palabra  si es aceptada
+	 * @param dictIgnored diccionario al que se agregara la palabra si esta se
+	 * ignora
+	 * @return palabra resultante de la decision del usuario
 	 */
 	
-	public static Word consultUser(Word word, Dictionary dict, Dictionary dict_ignored) throws IOException {
+	public static Word consultUser(Word word, Dictionary dict, Dictionary dictIgnored) {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String s;
-		do {
+		try {
+			do{
 			System.out.println("Palabra no  reconocida " + word.getWord() + " :");
 			System.out.println("Aceptar (a) - Ignorar (i) - Reemplazar (r)");
 			s = in.readLine();
-		} while(!s.equals("a") && !s.equals("i") && !s.equals("r"));
-		
-		if(s.equals("a")) {
-			dict.add(word);
-		}
-		if(s.equals("i")) {
-			dict_ignored.add(word);
-		}
-		if(s.equals("r")) {
-			System.out.println("Ingrese una palabra:");
-			word.setWord(in.readLine());
+			}while(!s.equals("a") && !s.equals("i") && !s.equals("r"));
+			
+			if(s.equals("a")) {
+				dict.add(word);
+			}
+			if(s.equals("i")) {
+				dictIgnored.add(word);
+			}
+			if(s.equals("r")) {
+				System.out.println("Ingrese una palabra:");
+				word.setWord(in.readLine());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return word;
 	}
 	
 	/**
-	 * Procesa el documento docIn, palabra por palabra, consultando al usuario 
-	 * sobre la accion a realizar si la palabra no es conocida. Escribe las
-	 * palabras conocidas e ignoradas en el documento de salida docOut.
-	 * @param docIn documento de entrada donde procesa palabra por palabra
-	 * @param docOut documento de salida
-	 * @param dictIn diccionario principal de entrada
-	 * @param dictIgnored diccionario con palabras ignoradas
-	 * @throws EOFException final de archivo
-	 * @throws FileNotFoundException intento de abrir el archivo denotado por 
-	 * 								 una ruta de acceso especificada ha fallado
-	 * @throws IOException se ha producido alguna excepcion I/O de algun tipo
+	 * Realiza la correcion ortografica del documento.
+	 * @param docIn archivo a procesar
+	 * @param doCOut archivo donde se guardara el resultado de la correcion
+	 * @param dictIn diccionario de palabras conocidas
+	 * @param dictIgnored diccionario de palabras ignoradas
+	 * 
 	 */
 	
 	public static void proccesDocument(String docIn, String docOut, Dictionary dictIn, Dictionary dictIgnored) {
@@ -97,6 +98,7 @@ public class Spellchecker {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontro el archivo "+ docIn);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -107,11 +109,11 @@ public class Spellchecker {
 	 *  principal.
 	 *  
 	 * @param args (documento de entrada) (diccionario principal)
-	 * @throws FileNotFoundException intento de abrir el archivo denotado por 
-	 * 								 una ruta de acceso especificada ha fallado
 	 */
 	
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
 		if (args.length < 1) {
 			System.out.println("nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
 			return;
