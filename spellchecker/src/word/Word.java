@@ -1,8 +1,8 @@
 package word;
 
 /**
- * Esta clase representa una palabra del diccionario.
- * La clase Word representa una palabra y es un wrapper sobre el tipo de datos String.
+ * Esta clase representa una palabra del diccionario, es un wrapper sobre el
+ * tipo de datos String.
  */
 
 public class Word {
