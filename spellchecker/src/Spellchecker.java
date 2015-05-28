@@ -45,22 +45,20 @@ public class Spellchecker {
 		try {
 			Document document = new Document(docIn, docOut);		
 			Word word = new Word();
-			boolean hayPalabra = true;
-			while(hayPalabra){
 				try {
-					word = document.getWord();
-					if(dictIn.contains(word) || dictIgnored.contains(word)) {
-						document.putWord(word);
-					} else {
-						word = consultUser(word, dictIn, dictIgnored);
-						document.putWord(word);
+					while(true){
+						word = document.getWord();
+						if(dictIn.contains(word) || dictIgnored.contains(word)) {
+							document.putWord(word);
+						} else {
+							word = consultUser(word, dictIn, dictIgnored);
+							document.putWord(word);
+						}
 					}
 				} catch (EOFException e) {
-					hayPalabra = false;
+					document.close();
+					System.out.println("El documento "+ docIn + " ha sido procesado. Resultados en out.txt");
 				}
-			}
-			document.close();
-			System.out.println("El documento "+ docIn + " ha sido procesado. Resultados en out.txt");
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontro el archivo "+ docIn);
 		} catch (IOException e) {
