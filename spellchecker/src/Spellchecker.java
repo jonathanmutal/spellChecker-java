@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,7 +72,7 @@ public class Spellchecker {
 	/**
 	 * Realiza la correcion ortografica del documento.
 	 * @param docIn archivo a procesar
-	 * @param doCOut archivo donde se guardara el resultado de la correcion
+	 * @param docOut archivo donde se guardara el resultado de la correcion
 	 * @param dictIn diccionario de palabras conocidas
 	 * @param dictIgnored diccionario de palabras ignoradas
 	 * 
@@ -120,6 +121,18 @@ public class Spellchecker {
 		}
 
 		String path = (args.length >= 2) ? args[1] : "dict.txt";
+		
+		if(path.equals("dict.txt")) {
+			File f = new File("dict.txt");
+			if(!f.exists()){
+				try {
+					f.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		String text = args[0];
 		FileDictionary dictMain;
 		try {

@@ -30,8 +30,8 @@ public class Document {
 	 * Construye un nuevo documento a procesar.
 	 * @param in archivo de entrada
 	 * @param out archivo de salida
-	 * @throws errores del metodo close y en el caso de no encuentre el archivo
-	 * in
+	 * @throws IOException errores del metodo close y en el caso de no encuentre
+	 *  el archivo
 	 */
 	
 	public Document(String in, String out) throws IOException  {
@@ -58,7 +58,7 @@ public class Document {
 	 * Lee el documento de entrada, palabra por palabra, copiando al documento
 	 * de salida todos los caracteres no alfabeticos precedentes que encuentre.
 	 * @return palabra leida del archivo
-	 * @throws Señala que se llego al final del archivo
+	 * @throws EOFException se llego al final del archivo
 	 */
 	
 	public Word getWord() throws EOFException {
