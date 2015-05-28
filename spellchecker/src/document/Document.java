@@ -27,15 +27,9 @@ public class Document {
 	public Word getWord() throws EOFException {
 		char c;
 		String string = "";
-		int n = 0;
+		int n = -1;
 		try {
-			n = input.read();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		while (n  != -1) {
-			try {
+			while ((n = input.read()) != -1) {
 				c = (char) n;
 				if(!Character.isAlphabetic(c)) {
 					if(string.equals("")){
@@ -47,11 +41,10 @@ public class Document {
 				} else {
 					string += c;
 					input.mark(0);
-				}
-				n = input.read();
-			} catch (IOException e) {
-				e.printStackTrace();
+			    }
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		if(n == -1) {
 			throw new EOFException();
