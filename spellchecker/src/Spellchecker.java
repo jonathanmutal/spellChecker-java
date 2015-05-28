@@ -114,8 +114,8 @@ public class Spellchecker {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		if (args.length < 1) {
-			System.out.println("nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
+		if (args.length < 1 || args.length > 2) {
+			System.out.println("Nro de argumentos erroneo. Deben ser <documento> [<diccionario>].");
 			return;
 		}
 
@@ -125,7 +125,7 @@ public class Spellchecker {
 		try {
 			dictMain = new FileDictionary(path);
 		} catch (FileNotFoundException e) {
-			System.out.println("No existe el diccionario");
+			System.out.println("No se encontro el archivo del diccionario: " + path);
 			return;
 		} 
 		
