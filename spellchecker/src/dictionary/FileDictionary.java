@@ -76,7 +76,6 @@ public class FileDictionary extends Dictionary{
 			
 	/**
 	 * Guarda en el diccionario en el mismo archivo desde el cual se cargo.
-	 * @param path ruta donde se guarda el diccionario
 	 * @throws IOException se ha producido alguna excepcion I/O de algun tipo
 	 */
 	

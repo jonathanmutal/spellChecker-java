@@ -33,7 +33,6 @@ public class Word {
 	/**
 	 * Setea un Word con un String.
 	 * @param s Un string para setear el word
-	 * @return void
 	 */
 
 	public void setWord(String s){

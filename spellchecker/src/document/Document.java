@@ -86,7 +86,7 @@ public class Document {
 	
 	/**
 	 * Escribe una palabra en el archivo de salida.
-	 * @param palabra a escribir
+	 * @param word palabra a escribir
 	 */
 	
 	public void putWord(Word word) {
