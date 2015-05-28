@@ -6,23 +6,54 @@ import java.io.EOFException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import word.Word;
 
+/**
+ * La clase Document representa el documento que se va a procesar.
+ */
+
 public class Document {
+	
+	/**
+	 * Representa el archivo del entrada  que contiene el documento a procesar.
+	 */
+	
 	private BufferedReader input;
+	
+	/**
+	 * Representa el archivo destino donde se guardara el documento modificado.
+	 */
+	
 	private BufferedWriter output;
+	
+	/**
+	 * Construye un nuevo documento a procesar.
+	 * @param in archivo de entrada
+	 * @param out archivo de salida
+	 */
 
 	public Document(String in, String out) throws IOException  {
 		input = new BufferedReader(new FileReader(in));
 		output = new BufferedWriter(new FileWriter(out));
 		
 	}
+
+	/**
+	 * Cierra el documento.
+	 *@throws Excepciones lanzadas por el metodo close
+	 */
 	
 	public void close() throws IOException {
 		input.close();
 		output.close();
 	}
+	
+	/**
+	 * Lee el documento de entrada, palabra por palabra, copiando al documento
+	 * de salida todos los caracteres no alfabeticos precedentes que encuentre.
+	 * @return palabra leida del archivo
+	 * @throws Señala que se llego al final del archivo
+	 */
 	
 	public Word getWord() throws EOFException {
 		char c;
@@ -53,6 +84,10 @@ public class Document {
 		return word;
 	}
 	
+	/**
+	 * Escribe una palabra en el archivo de salida.
+	 * @param palabra a escribir
+	 */
 	
 	public void putWord(Word word) {
 		try {

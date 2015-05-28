@@ -4,17 +4,19 @@ import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import word.Word;
-
 import dictionary.Dictionary;
 import dictionary.FileDictionary;
 import dictionary.MemDictionary;
 import document.Document;
 
+/**
+ * La clase Spellchecker es el punto de entrada a la aplicacion.
+ */
 
 public class Spellchecker {
 
+	
 	public Spellchecker() {
 		
 	}
